@@ -1,11 +1,11 @@
 Name: solutionid
-SchemaVersion: '1.0'
+SchemaVersion: "1.0"
 Triggers:
   - Type: PUSH
     Branches:
       - main
   - Type: SCHEDULE
-    Expression: "0 2 * * ? *"
+    Expression: 0 2 * * ? *
     Branches:
       - main
 Compute:

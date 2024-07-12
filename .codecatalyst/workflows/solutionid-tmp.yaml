@@ -1,11 +1,11 @@
 Name: solutionid-tmp
-SchemaVersion: '1.0'
+SchemaVersion: "1.0"
 Triggers:
   - Type: PUSH
     Branches:
       - main
   - Type: SCHEDULE
-    Expression: "0 2 * * ? *"
+    Expression: 0 2 * * ? *
     Branches:
       - main
 Compute:
@@ -19,10 +19,15 @@ Actions:
         - WorkflowSource
       Variables:
         - Name: region
+          Value: us-west-2
         - Name: bucketPrefix
+          Value: guidance-idp-4
         - Name: guidanceVersion
+          Value: v2.0.0
         - Name: DomainName
+          Value: MySagemakerDomain
         - Name: UserProfileName
+          Value: SageMakerUser
     Outputs:
       AutoDiscoverReports:
         Enabled: false
@@ -41,3 +46,6 @@ Actions:
         Image: CodeCatalystLinux_x86_64:2024_03
     Environment:
       Name: prod_environment
+      Connections:
+        - Name: "991639198278"
+          Role: CodeCatalystWorkflowDevelopmentRole-vjprince
