@@ -4,6 +4,7 @@ Triggers:
   - Type: PUSH
     Branches:
       - main
+      - solution-id-test
   - Type: SCHEDULE
     Expression: "0 2 * * ? *"
     Branches:
