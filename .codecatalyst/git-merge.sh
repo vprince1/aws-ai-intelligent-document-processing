@@ -4,6 +4,10 @@ echo "User Name: $1"
 echo "User Email: $2"
 echo "User ID: $3"
 echo "PAT: $4"
+
+GITHUB_PARENT_USER="vprince1"
+GITHUB_PARENT_REPO_NAME="aws-ai-intelligent-document-processing"
+
 if [ $# -ne 4 ]; then
   echo "Expected 4 arguments 'User Name', 'User Email', 'User Id', 'token'"
   exit 1   
@@ -24,20 +28,20 @@ sudo yum -y install rsync
 if [ -d "$CLEAN_DIR" ]; then
   echo "Clean existing directory"
   cd clean
-  rm -rf aws-ai-intelligent-document-processing
+  rm -rf $GITHUB_PARENT_REPO_NAME 
 else
   echo "Create new directory"
   mkdir clean
   cd clean
 fi
-echo "git clone https://github.com/vprince1/aws-ai-intelligent-document-processing.git"
-git clone https://github.com/vprince1/aws-ai-intelligent-document-processing.git
+echo "git clone https://github.com/$GITHUB_PARENT_USER/$GITHUB_PARENT_REPO_NAME.git"
+git clone https://github.com/$GITHUB_PARENT_USER/$GITHUB_PARENT_REPO_NAME.git
 echo "Folder of clean parent repo: $(pwd)"
 echo "cd $repo_path"
 cd $repo_path
 echo "Folder of cloned repo: $(pwd)"
-echo "rsync -aq --exclude .codecatalyst --exclude .git ./../clean/aws-ai-intelligent-document-processing/* ."
-rsync -aq --exclude .codecatalyst --exclude .git ./../clean/aws-ai-intelligent-document-processing/* .
+echo "rsync -aq --exclude .codecatalyst --exclude .git ./../clean/$GITHUB_PARENT_REPO_NAME/* ."
+rsync -aq --exclude .codecatalyst --exclude .git ./../clean/$GITHUB_PARENT_REPO_NAME/* .
 first_commit_time=$(date --date "$(git show -s --format=%cI $(git rev-list --max-parents=0 HEAD))" +"%s")
 echo "First Commit Time: $first_commit_time"
 current_time=$(date --date "$(date)" +"%s")
@@ -52,7 +56,7 @@ if [ $time_diff > 300 ]; then
     git config --global user.email "$USER_EMAIL"
     git config --global user.name "$USER_NAME"
     git add .
-    git commit -m "Updated from parent https://github.com/vprince1/aws-ai-intelligent-document-processing.git"
+    git commit -m "Updated from parent https://github.com/$GITHUB_PARENT_USER/$GITHUB_PARENT_REPO_NAME.git"
     git branch temp-branch
     git checkout main
     git merge temp-branch
