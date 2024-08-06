@@ -15,6 +15,8 @@ CLEAN_DIR="clean"
 USER_ID=$3
 PAT=$4
 
+repo_path=$(pwd)
+echo "Repo Path: $repo_path"
 pwd
 cd ..
 pwd
@@ -31,7 +33,8 @@ fi
 echo "git clone https://github.com/vprince1/aws-ai-intelligent-document-processing.git"
 git clone https://github.com/vprince1/aws-ai-intelligent-document-processing.git
 echo "Folder of clean parent repo: $(pwd)"
-cd ./../aws-ai-intelligent-document-processing
+echo "cd $repo_path"
+cd $repo_path
 echo "Folder of cloned repo: $(pwd)"
 echo "rsync -aq --exclude .codecatalyst --exclude .git ./../clean/aws-ai-intelligent-document-processing/* ."
 rsync -aq --exclude .codecatalyst --exclude .git ./../clean/aws-ai-intelligent-document-processing/* .
