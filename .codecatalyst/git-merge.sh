@@ -5,8 +5,22 @@ echo "User Email: $2"
 echo "User ID: $3"
 echo "PAT: $4"
 
-GITHUB_PARENT_USER="vprince1"
-GITHUB_PARENT_REPO_NAME="aws-ai-intelligent-document-processing"
+# Name of the environment variable file
+ENV_FILE=".env"
+
+# Check if the environment file exists
+if [ ! -f "$ENV_FILE" ]; then
+    echo "Error: $ENV_FILE file not found."
+    exit 1
+fi
+
+# Load environment variables from the file
+set -a
+source "$ENV_FILE"
+set +a
+
+#GITHUB_PARENT_USER="vprince1"
+#GITHUB_PARENT_REPO_NAME="aws-ai-intelligent-document-processing"
 
 if [ $# -ne 4 ]; then
   echo "Expected 4 arguments 'User Name', 'User Email', 'User Id', 'token'"
