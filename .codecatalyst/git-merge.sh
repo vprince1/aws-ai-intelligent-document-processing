@@ -6,7 +6,10 @@ echo "User ID: $3"
 echo "PAT: $4"
 
 # Name of the environment variable file
-ENV_FILE=".env"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+# Name of the environment variable file
+ENV_FILE="$SCRIPT_DIR/.env"
 
 # Check if the environment file exists
 if [ ! -f "$ENV_FILE" ]; then
