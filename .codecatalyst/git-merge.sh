@@ -54,8 +54,8 @@ echo "Folder of clean parent repo: $(pwd)"
 echo "cd $repo_path"
 cd $repo_path
 echo "Folder of cloned repo: $(pwd)"
-echo "rsync -aq --exclude .codecatalyst --exclude .git ./../clean/$GITHUB_PARENT_REPO_NAME/* ."
-rsync -aq --exclude .codecatalyst --exclude .git ./../clean/$GITHUB_PARENT_REPO_NAME/* .
+echo "rsync -aq --exclude '.codecatalyst/*.yaml' --exclude '.git' ./../clean/$GITHUB_PARENT_REPO_NAME/* ."
+rsync -aq --exclude '.codecatalyst/*.yaml' --exclude '.git' ./../clean/$GITHUB_PARENT_REPO_NAME/* .
 first_commit_time=$(date --date "$(git show -s --format=%cI $(git rev-list --max-parents=0 HEAD))" +"%s")
 echo "First Commit Time: $first_commit_time"
 current_time=$(date --date "$(date)" +"%s")
