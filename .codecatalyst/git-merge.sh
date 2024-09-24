@@ -66,7 +66,7 @@ echo "Time Difference: $time_diff"
 if [ $time_diff > 300 ]; then
   git diff-index --quiet HEAD --
   if [ $? -eq 1 ]; then
-    echo "Code changes detected"
+    echo "Code changes detected - new 1"
     git diff-index HEAD --
     echo "Git remotes"
     git remote -v
