@@ -10,6 +10,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 # Name of the environment variable file
 ENV_FILE="$SCRIPT_DIR/.env"
+echo "ENV_FILE: $ENV_FILE"
 
 # Check if the environment file exists
 if [ ! -f "$ENV_FILE" ]; then
@@ -21,9 +22,6 @@ fi
 set -a
 source "$ENV_FILE"
 set +a
-
-#GITHUB_PARENT_USER="vprince1"
-#GITHUB_PARENT_REPO_NAME="aws-ai-intelligent-document-processing"
 
 if [ $# -ne 4 ]; then
   echo "Expected 4 arguments 'User Name', 'User Email', 'User Id', 'token'"
