@@ -56,9 +56,11 @@ echo "cd $repo_path"
 cd $repo_path
 echo "Folder of cloned repo: $(pwd)"
 #echo "rsync -aq --exclude '.codecatalyst/*.yaml' --exclude '.git' ./../clean/$GITHUB_PARENT_REPO_NAME/* ."
-echo "rsync -av --exclude='.git/' --exclude='.codecatalyst/**/*.yaml' --exclude='.codecatalyst/*.yaml' ./../clean/$GITHUB_PARENT_REPO_NAME/ ."
+#echo "rsync -av --exclude='.git/' --exclude='.codecatalyst/**/*.yaml' --exclude='.codecatalyst/*.yaml' ./../clean/$GITHUB_PARENT_REPO_NAME/ ."
+echo "rsync -av --exclude='.git/' --exclude='.codecatalyst/' ./../clean/$GITHUB_PARENT_REPO_NAME/ ."
 #rsync -aq --exclude '.codecatalyst/*.yaml' --exclude '.git' ./../clean/$GITHUB_PARENT_REPO_NAME/* .
-rsync -av --exclude='.git/' --exclude='.codecatalyst/**/*.yaml' --exclude='.codecatalyst/*.yaml' ./../clean/$GITHUB_PARENT_REPO_NAME/ .
+#rsync -av --exclude='.git/' --exclude='.codecatalyst/**/*.yaml' --exclude='.codecatalyst/*.yaml' ./../clean/$GITHUB_PARENT_REPO_NAME/ .
+rsync -av --exclude='.git/' --exclude='.codecatalyst/' ./../clean/$GITHUB_PARENT_REPO_NAME/ .
 first_commit_time=$(date --date "$(git show -s --format=%cI $(git rev-list --max-parents=0 HEAD))" +"%s")
 echo "First Commit Time: $first_commit_time"
 current_time=$(date --date "$(date)" +"%s")
@@ -78,7 +80,7 @@ if [ $time_diff > 300 ]; then
     git commit -m "Updated from parent https://github.com/$GITHUB_PARENT_USER/$GITHUB_PARENT_REPO_NAME.git"
     git branch temp-branch
     git checkout main
-    git merge temp-branch
+    git merge -X theirs temp-branch
     echo "Before Push"
     remote_url=$(git config --get remote.origin.url)
     echo "Remote URL: $remote_url"
