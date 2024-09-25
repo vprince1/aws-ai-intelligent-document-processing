@@ -55,8 +55,10 @@ echo "Folder of clean parent repo: $(pwd)"
 echo "cd $repo_path"
 cd $repo_path
 echo "Folder of cloned repo: $(pwd)"
-echo "rsync -aq --exclude '.codecatalyst/*.yaml' --exclude '.git' ./../clean/$GITHUB_PARENT_REPO_NAME/* ."
-rsync -aq --exclude '.codecatalyst/*.yaml' --exclude '.git' ./../clean/$GITHUB_PARENT_REPO_NAME/* .
+#echo "rsync -aq --exclude '.codecatalyst/*.yaml' --exclude '.git' ./../clean/$GITHUB_PARENT_REPO_NAME/* ."
+echo "rsync -av --exclude='.git/' --exclude='.codecatalyst/**/*.yaml' --exclude='.codecatalyst/*.yaml' ./../clean/$GITHUB_PARENT_REPO_NAME/ ."
+#rsync -aq --exclude '.codecatalyst/*.yaml' --exclude '.git' ./../clean/$GITHUB_PARENT_REPO_NAME/* .
+rsync -av --exclude='.git/' --exclude='.codecatalyst/**/*.yaml' --exclude='.codecatalyst/*.yaml' ./../clean/$GITHUB_PARENT_REPO_NAME/ .
 first_commit_time=$(date --date "$(git show -s --format=%cI $(git rev-list --max-parents=0 HEAD))" +"%s")
 echo "First Commit Time: $first_commit_time"
 current_time=$(date --date "$(date)" +"%s")
@@ -66,7 +68,7 @@ echo "Time Difference: $time_diff"
 if [ $time_diff > 300 ]; then
   git diff-index --quiet HEAD --
   if [ $? -eq 1 ]; then
-    echo "Code changes detected"
+    echo "Code changes detected - new 1"
     git diff-index HEAD --
     echo "Git remotes"
     git remote -v
